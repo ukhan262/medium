@@ -1,0 +1,28 @@
+name: Post to medium
+on:
+  push:
+    branches:
+      - "main"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: "Checkout code"
+        uses: "actions/checkout@v3"
+        with:
+          fetch-depth: 0
+      - name: "Upload modified articles"
+        id: list_files
+        env:
+          MEDIUM_TOKEN: ${{ secrets.MEDIUM_TOKEN }}
+        run: |
+          modified_articles=$(git diff --name-only origin/main..HEAD | grep "articles/")
+          
+          for article in $modified_articles; do
+            python3 src/main.py -f "$article"
+          done
