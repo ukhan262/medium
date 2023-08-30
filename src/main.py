@@ -56,10 +56,10 @@ def post_article(contents, state="draft"):
         headers = {"Authorization": f"Bearer {api_token}"}
 
         article_metadata = {
-            "title": "Hello World",
+            "title": "Reusable Terraform Deployment Workflow",
             "contentFormat": "markdown",
             "content": contents,
-            "tags": ["helloworld", "testing"],
+            "tags": ["devops", "automation", "workflows", "github", "terraform"],
             "publishStatus": state,
         }
 
