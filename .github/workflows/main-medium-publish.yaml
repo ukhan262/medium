@@ -24,5 +24,6 @@ jobs:
           modified_articles=$(git diff --name-only origin/main..HEAD | grep "articles/")
           
           for article in $modified_articles; do
+            echo $article
             python3 src/main.py -f "$article"
           done
